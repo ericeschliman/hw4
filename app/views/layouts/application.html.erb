@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tacostagram Final</title>
+    <title>Eric's Travel Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/application.css">
   </head>
 
   <body>
+  <div class ="container">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+        <div> 
+          <% if @current_user %>
+          Logged in as: <%= @current_user["username"] %> |
+          <a href="/logout" class="btn btn-default">Logout</a>
+        <% else %>
+          <a href="/login" class="btn btn-default">Login</a> |
+          <a href="/users/new" class="btn btn-default">Sign Up</a>
+        <% end %>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/places">Home</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
     <div>
       <%= flash["notice"] %>
     </div>
-    
-    <div> 
-          <% if @current_user %>
-          Logged in as: <%= @current_user["username"] %> |
-          <a href="/logout" >Logout</a>
-        <% else %>
-          <a href="/login" >Login</a> |
-          <a href="/users/new" >Sign Up</a>
-        <% end %>
-    </div>
-
     <%= yield %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
   </body>
 </html>
