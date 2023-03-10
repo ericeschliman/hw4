@@ -5,8 +5,12 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @place = Place.find_by({ "id" => params["id"] })
-    @posts = Post.where({ "place_id" => @place["id"] })
+    if @current_user
+      @place = Place.find_by({ "id" => params["id"] })
+      @posts = Post.where({ "place_id" => @place["id"] })
+    else
+      flash["notice"] = "Login first."
+    end
   end
 
   def new

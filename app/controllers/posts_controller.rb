@@ -5,8 +5,12 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
-    @post.place_id = params["place_id"]
+    if @current_user
+      @post = Post.new
+      @post.place_id = params["place_id"]
+    else
+      flash["notice"] = "Login first."
+    end
   end
 
   def create
